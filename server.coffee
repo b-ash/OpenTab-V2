@@ -6,8 +6,8 @@ exports.startServer = (port, path, callback) ->
   server.use (request, response, next) ->
     response.header 'Cache-Control', 'no-cache'
     next()
-  server.use '/logzilla/', express.static path
-  server.all '/logzilla/*', (request, response) ->
+  server.use '/', express.static path
+  server.all '/*', (request, response) ->
     response.sendfile sysPath.join path, 'index.html'
   server.listen parseInt port, 10
   server.on 'listening', callback
