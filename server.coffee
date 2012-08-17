@@ -17,4 +17,5 @@ exports.startServer = (port, path, callback) ->
   server
 
 # We only start this up if we're not using brunch to run it. Pretty hacky, I know.
-exports.startServer config.server.port, config.paths.public, -> console.log 'Listening, dawg' unless config.server.run?
+port = process.env.PORT or config.server.port
+exports.startServer port, config.paths.public, -> console.log 'Listening, dawg' unless config.server.run?
