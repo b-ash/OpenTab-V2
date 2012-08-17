@@ -11,7 +11,7 @@ exports.startServer = (port, path, callback) ->
     next()
   server.use '/', express.static path
   server.all '/*', (request, response) ->
-    response.sendfile sysPath.join path, 'index.html'
+    response.sendfile "#{__dirname}#{path}index.html"
   server.listen parseInt port, 10
   server.on 'listening', callback
   server
