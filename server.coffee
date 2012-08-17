@@ -1,3 +1,4 @@
+fs = require 'fs'
 express = require 'express'
 sysPath = require 'path'
 
@@ -9,9 +10,11 @@ exports.startServer = (port, path, callback) ->
   server.use (request, response, next) ->
     response.header 'Cache-Control', 'no-cache'
     next()
-  server.use '/', express.static path
+  server.use '', express.static path
   server.all '/*', (request, response) ->
-    response.sendfile "#{__dirname}#{path}index.html"
+    dir = "#{__dirname}/#{path}/index.html"
+    console.log "Serving #{dir}"
+    response.sendfile dir
   server.listen parseInt port, 10
   server.on 'listening', callback
   server
