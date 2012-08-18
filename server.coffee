@@ -24,7 +24,7 @@ exports.startServer = (port, path, callback) ->
       server.use server.router
 
   server.get '/', (req, res) ->
-    res.render "index.html"
+    res.render "#{__dirname}/#{path}/index.html"
 
   port = parseInt(process.env.PORT or port, 10)
   server.listen port
