@@ -5129,7 +5129,7 @@ a.thumbnail:hover {
 }
 @font-face {
   font-family: Comfortaa;
-  src: url("/static/fonts/Comfortaa-Light.ttf") format('truetype');
+  src: url("/static/fonts/Comfortaa-Regular.ttf") format('truetype');
 }
 .clear {
   clear: both;
