@@ -10,13 +10,21 @@ exports.startServer = (port, path, callback) ->
   # server.all '/*', (request, response) ->
   #   response.sendfile "#{__dirname}#{path}index.html"
 
-  server.use (request, response, next) ->
-    response.header 'Cache-Control', 'no-cache'
-    next()
-  server.use '/', express.static path
+  server.configure () ->
+    server.use express.static("#{__dirname}/#{path}")
+    server.use express.bodyParser()
+    server.use express.methodOverride()
+
+    # Error handling
+    server.use express.logger()
+    server.use express.errorHandler
+      dumpExceptions: true
+      showStack: true
+
+      server.use server.router
+
   server.get '/', (req, res) ->
-    res.sendfile "#{__dirname}/#{path}/index.html"
-  port = process.env.PORT or port
+    res.redirect "/index.html"
 
 
   server.listen parseInt port, 10
