@@ -24,9 +24,10 @@ exports.startServer = (port, path, callback) ->
       server.use server.router
 
   server.get '/', (req, res) ->
-    res.redirect "/index.html"
+    res.render "index.html"
 
-  server.listen process.env.PORT or parseInt(port, 10)
+  port = parseInt(process.env.PORT or port, 10)
+  server.listen port
   server.on 'listening', -> console.log "Listening on #{port}, dawg"
   server
 
