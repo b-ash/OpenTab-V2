@@ -29,7 +29,9 @@
 
     "express": "~2.5.11",
     "socket.io": "0.9.x",
-    "redis": "0.5.x"
+    "redis": "0.5.x",
+    "redis-url": "0.1.0",
+    "pg": "0.5.4"
 
   },
   "devDependencies": {
