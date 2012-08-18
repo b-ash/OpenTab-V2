@@ -19,7 +19,6 @@ exports.startServer = (port, path, callback) ->
       showStack: true
 
   server.use express.static("#{__dirname}/#{path}")
-
   server.listen port, -> console.log "Listening on #{port}, dawg"
   server
 
