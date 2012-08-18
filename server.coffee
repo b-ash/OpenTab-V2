@@ -21,7 +21,7 @@ exports.startServer = (port, path, callback) ->
   #     dumpExceptions: true
   #     showStack: true
 
-  server.use '/', express.static("#{__dirname}/public")
+  server.use express.static("#{__dirname}/public")
   # server.get '/', (req, res) ->
   #   res.sendfile "#{fullPath}/index.html"
 
