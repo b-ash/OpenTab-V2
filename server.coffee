@@ -8,22 +8,22 @@ fullPath = sysPath.resolve 'config'
 exports.startServer = (port, path, callback) ->
   server = express.createServer express.logger()
   port = parseInt(process.env.PORT or port, 10)
-  fullPath = "#{__dirname}/#{path}"
+  # fullPath = "#{__dirname}/#{path}"
 
-  console.log "Port #{port}, path #{path}, fullPath #{fullPath}"
+  # console.log "Port #{port}, path #{path}, fullPath #{fullPath}"
 
-  server.configure ->
-    server.use express.bodyParser()
-    server.use express.methodOverride()
-    server.use '/', express.static(fullPath)
+  # server.configure ->
+  #   server.use express.bodyParser()
+  #   server.use express.methodOverride()
 
-    # Error handling
-    server.use express.errorHandler
-      dumpExceptions: true
-      showStack: true
+  #   # Error handling
+  #   server.use express.errorHandler
+  #     dumpExceptions: true
+  #     showStack: true
 
-  server.get '/', (req, res) ->
-    res.sendfile "#{fullPath}/index.html"
+  server.use '/', express.static("#{__dirname}/public")
+  # server.get '/', (req, res) ->
+  #   res.sendfile "#{fullPath}/index.html"
 
   server.listen port, -> console.log "Listening on #{port}, dawg"
   server
