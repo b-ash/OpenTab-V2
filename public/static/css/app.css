@@ -5150,12 +5150,30 @@ a:hover,
 a:visited {
   color: #08c;
 }
+.main-page,
+.navbar-fixed-top {
+  min-width: 960px;
+}
+.main-page {
+  width: 100%;
+  margin: 0 auto;
+}
+#four-oh-four-wrapper {
+  width: 100%;
+  margin-top: 40px;
+}
+#four-oh-four-wrapper #four-oh-four {
+  width: 599px;
+  height: 436px;
+  margin: 0 auto;
+}
 #nav .container {
   margin: 0 20px;
 }
 #nav .container .brand {
   font-weight: bold;
   font-size: 25px;
+  padding: 10px 20px;
 }
 #nav .container a {
   font-family: 'Comfortaa', 'helvetica';
@@ -5164,15 +5182,62 @@ a:visited {
   font-size: 18px;
   margin-top: 2px;
 }
-#nav .container .right {
+#nav .container .right a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+#nav .container .right a:hover a {
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 40px;
+  text-decoration: none;
+}
+#nav .container .link-divider {
+  padding: 0 5px;
+}
+@font-face {
+  font-family: Comfortaa;
+  src: url("/static/fonts/Comfortaa-Regular.ttf") format('truetype');
+}
+.clear {
+  clear: both;
+}
+.hidden {
+  display: none;
+}
+.bold {
+  font-weight: bold;
+}
+.left {
+  float: left;
+}
+.right {
   float: right;
+}
+a:hover,
+a:visited {
+  color: #08c;
+}
+#nav .container {
+  margin: 0 20px;
+}
+#nav .container .brand {
+  font-weight: bold;
+  font-size: 25px;
+  padding: 10px 20px;
+}
+#nav .container a {
+  font-family: 'Comfortaa', 'helvetica';
+}
+#nav .container li a {
+  font-size: 18px;
+  margin-top: 2px;
 }
 #nav .container .right a:hover {
   cursor: pointer;
   text-decoration: underline;
 }
-#nav .container a.logout,
-#nav .container a.cashcats {
+#nav .container .right a:hover a {
   font-weight: bold;
   font-size: 15px;
   line-height: 40px;
