@@ -23,7 +23,7 @@ exports.startServer = (port, path, callback) ->
       showStack: true
 
   server.get '/', (req, res) ->
-    res.render "#{fullPath}/index.html"
+    res.sendfile "#{fullPath}/index.html"
 
   server.listen port, -> console.log "Listening on #{port}, dawg"
   server
