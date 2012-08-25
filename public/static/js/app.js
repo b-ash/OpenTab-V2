@@ -8,7 +8,7 @@
   var cache = {};
 
   var has = function(object, name) {
-    return ({}).hasOwnProperty.call(object, name);
+    return hasOwnProperty.call(object, name);
   };
 
   var expand = function(root, name) {
@@ -37,7 +37,7 @@
     return function(name) {
       var dir = dirname(path);
       var absolute = expand(dir, name);
-      return globals.require(absolute);
+      return require(absolute);
     };
   };
 
@@ -75,268 +75,247 @@
 })();
 
 window.require.define({"application": function(exports, require, module) {
-  (function() {
-    var Application;
+  var Application;
 
-    Application = {
-      initialize: function(onSuccess) {
-        var Router, utils;
-        Router = require('lib/router');
-        utils = require('lib/utils');
-        this.views = {};
-        this.router = new Router();
-        Backbone.history.start({
-          pushState: true
-        });
-        return onSuccess();
-      }
-    };
+  Application = {
+    initialize: function(onSuccess) {
+      var Router, utils;
+      Router = require('lib/router');
+      utils = require('lib/utils');
+      this.views = {};
+      this.router = new Router();
+      Backbone.history.start({
+        pushState: true
+      });
+      return onSuccess();
+    }
+  };
 
-    module.exports = Application;
-
-  }).call(this);
+  module.exports = Application;
   
 }});
 
 window.require.define({"collections/collection": function(exports, require, module) {
-  (function() {
-    var Collection,
-      __hasProp = Object.prototype.hasOwnProperty,
-      __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+  var Collection,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-    module.exports = Collection = (function(_super) {
+  module.exports = Collection = (function(_super) {
 
-      __extends(Collection, _super);
+    __extends(Collection, _super);
 
-      function Collection() {
-        Collection.__super__.constructor.apply(this, arguments);
-      }
+    function Collection() {
+      return Collection.__super__.constructor.apply(this, arguments);
+    }
 
-      return Collection;
+    return Collection;
 
-    })(Backbone.Collection);
-
-  }).call(this);
+  })(Backbone.Collection);
   
 }});
 
 window.require.define({"initialize": function(exports, require, module) {
-  (function() {
+  
+  window.app = require('application');
 
-    window.app = require('application');
+  console.log('----starting up----');
 
-    console.log('----starting up----');
-
-    $(function() {
-      var _this = this;
-      return app.initialize(function() {
-        return console.log('success');
-      });
+  $(function() {
+    var _this = this;
+    return app.initialize(function() {
+      return console.log('success');
     });
-
-  }).call(this);
+  });
   
 }});
 
 window.require.define({"lib/router": function(exports, require, module) {
-  (function() {
-    var Router, app, utils,
-      __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-      __hasProp = Object.prototype.hasOwnProperty,
-      __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+  var Router, app, utils,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-    app = require('application');
+  app = require('application');
 
-    utils = require('lib/utils');
+  utils = require('lib/utils');
 
-    module.exports = Router = (function(_super) {
+  module.exports = Router = (function(_super) {
 
-      __extends(Router, _super);
+    __extends(Router, _super);
 
-      function Router() {
-        this.index = __bind(this.index, this);
-        Router.__super__.constructor.apply(this, arguments);
-      }
+    function Router() {
+      this.index = __bind(this.index, this);
+      return Router.__super__.constructor.apply(this, arguments);
+    }
 
-      Router.prototype.routes = {
-        '*action': 'index'
-      };
+    Router.prototype.routes = {
+      '*action': 'index'
+    };
 
-      Router.prototype.index = function() {};
+    Router.prototype.index = function() {};
 
-      return Router;
+    return Router;
 
-    })(Backbone.Router);
-
-  }).call(this);
+  })(Backbone.Router);
   
 }});
 
 window.require.define({"lib/utils": function(exports, require, module) {
-  (function() {
-
-    module.exports = {};
-
-  }).call(this);
+  
+  module.exports = {};
   
 }});
 
 window.require.define({"lib/view_helper": function(exports, require, module) {
-  (function() {
-
-    Handlebars.registerHelper("debug", function(optionalValue) {
-      console.log("Current Context");
+  
+  Handlebars.registerHelper("debug", function(optionalValue) {
+    console.log("Current Context");
+    console.log("====================");
+    console.log(this);
+    if (optionalValue && optionalValue.hash === void 0) {
+      console.log("Value");
       console.log("====================");
-      console.log(this);
-      if (optionalValue && optionalValue.hash === void 0) {
-        console.log("Value");
-        console.log("====================");
-        return console.log(optionalValue);
-      }
-    });
-
-  }).call(this);
+      return console.log(optionalValue);
+    }
+  });
   
 }});
 
 window.require.define({"models/model": function(exports, require, module) {
-  (function() {
-    var Model,
-      __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-      __hasProp = Object.prototype.hasOwnProperty,
-      __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+  var Model,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-    module.exports = Model = (function(_super) {
+  module.exports = Model = (function(_super) {
 
-      __extends(Model, _super);
+    __extends(Model, _super);
 
-      function Model() {
-        this.close = __bind(this.close, this);
-        Model.__super__.constructor.apply(this, arguments);
-      }
+    function Model() {
+      this.close = __bind(this.close, this);
+      return Model.__super__.constructor.apply(this, arguments);
+    }
 
-      Model.prototype.close = function() {
-        this.unbind();
-        return typeof this.onClose === "function" ? this.onClose() : void 0;
-      };
+    Model.prototype.close = function() {
+      this.unbind();
+      return typeof this.onClose === "function" ? this.onClose() : void 0;
+    };
 
-      return Model;
+    return Model;
 
-    })(Backbone.Model);
-
-  }).call(this);
+  })(Backbone.Model);
   
 }});
 
 window.require.define({"views/404": function(exports, require, module) {
-  (function() {
-    var FourOhFourView, View,
-      __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-      __hasProp = Object.prototype.hasOwnProperty,
-      __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+  var FourOhFourView, View,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-    View = require('./view');
+  View = require('./view');
 
-    FourOhFourView = (function(_super) {
+  FourOhFourView = (function(_super) {
 
-      __extends(FourOhFourView, _super);
+    __extends(FourOhFourView, _super);
 
-      function FourOhFourView() {
-        this.initialize = __bind(this.initialize, this);
-        FourOhFourView.__super__.constructor.apply(this, arguments);
-      }
+    function FourOhFourView() {
+      this.initialize = __bind(this.initialize, this);
+      return FourOhFourView.__super__.constructor.apply(this, arguments);
+    }
 
-      FourOhFourView.prototype.el = '.main-page';
+    FourOhFourView.prototype.el = '.main-page';
 
-      FourOhFourView.prototype.template = require('./templates/404');
+    FourOhFourView.prototype.template = require('./templates/404');
 
-      FourOhFourView.prototype.initialize = function() {
-        return this.render();
-      };
+    FourOhFourView.prototype.initialize = function() {
+      return this.render();
+    };
 
-      return FourOhFourView;
+    return FourOhFourView;
 
-    })(View);
+  })(View);
 
-    module.exports = FourOhFourView;
-
-  }).call(this);
+  module.exports = FourOhFourView;
   
 }});
 
 window.require.define({"views/view": function(exports, require, module) {
-  (function() {
-    var View, app, utils,
-      __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-      __hasProp = Object.prototype.hasOwnProperty,
-      __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
+  var View, app, utils,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-    utils = require('lib/utils');
+  utils = require('lib/utils');
 
-    app = require('application');
+  app = require('application');
 
-    require('lib/view_helper');
+  require('lib/view_helper');
 
-    module.exports = View = (function(_super) {
+  module.exports = View = (function(_super) {
 
-      __extends(View, _super);
+    __extends(View, _super);
 
-      function View() {
-        this.routeLink = __bind(this.routeLink, this);
-        this.routeEvent = __bind(this.routeEvent, this);
-        this.close = __bind(this.close, this);
-        this.render = __bind(this.render, this);
-        this.getInput = __bind(this.getInput, this);
-        View.__super__.constructor.apply(this, arguments);
+    function View() {
+      this.routeLink = __bind(this.routeLink, this);
+
+      this.routeEvent = __bind(this.routeEvent, this);
+
+      this.close = __bind(this.close, this);
+
+      this.render = __bind(this.render, this);
+
+      this.getInput = __bind(this.getInput, this);
+      return View.__super__.constructor.apply(this, arguments);
+    }
+
+    View.prototype.views = {};
+
+    View.prototype.template = function() {};
+
+    View.prototype.getRenderData = function() {};
+
+    View.prototype.getInput = function() {
+      if (!this.$in) {
+        this.$in = $(this["in"]);
       }
+      return this.$in;
+    };
 
-      View.prototype.views = {};
+    View.prototype.render = function() {
+      this.$el.html(this.template(this.getRenderData()));
+      this.afterRender();
+      return this;
+    };
 
-      View.prototype.template = function() {};
+    View.prototype.afterRender = function() {};
 
-      View.prototype.getRenderData = function() {};
+    View.prototype.close = function() {
+      this.remove();
+      this.unbind();
+      return typeof this.onClose === "function" ? this.onClose() : void 0;
+    };
 
-      View.prototype.getInput = function() {
-        if (!this.$in) this.$in = $(this["in"]);
-        return this.$in;
-      };
+    View.prototype.routeEvent = function(event) {
+      var $link, url;
+      $link = $(event.target);
+      url = $link.attr('href');
+      if ($link.attr('target') === '_blank' || typeof url === 'undefined' || url.substr(0, 4) === 'http' || url === '' || url === 'javascript:void(0)') {
+        return true;
+      }
+      event.preventDefault();
+      return this.routeLink(url);
+    };
 
-      View.prototype.render = function() {
-        this.$el.html(this.template(this.getRenderData()));
-        this.afterRender();
-        return this;
-      };
+    View.prototype.routeLink = function(url) {
+      return app.router.navigate(url, {
+        trigger: true
+      });
+    };
 
-      View.prototype.afterRender = function() {};
+    return View;
 
-      View.prototype.close = function() {
-        this.remove();
-        this.unbind();
-        return typeof this.onClose === "function" ? this.onClose() : void 0;
-      };
-
-      View.prototype.routeEvent = function(event) {
-        var $link, url;
-        $link = $(event.target);
-        url = $link.attr('href');
-        if ($link.attr('target') === '_blank' || typeof url === 'undefined' || url.substr(0, 4) === 'http' || url === '' || url === 'javascript:void(0)') {
-          return true;
-        }
-        event.preventDefault();
-        return this.routeLink(url);
-      };
-
-      View.prototype.routeLink = function(url) {
-        return app.router.navigate(url, {
-          trigger: true
-        });
-      };
-
-      return View;
-
-    })(Backbone.View);
-
-  }).call(this);
+  })(Backbone.View);
   
 }});
 
